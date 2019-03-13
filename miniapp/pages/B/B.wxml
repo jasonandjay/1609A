@@ -1,0 +1,3 @@
+<navigator url="/pages/C/C" open-type="navigate" hover-class="className">navigate to C</navigator>
+
+<navigator url="/pages/C/C" open-type="redirect" hover-class="className">redirect to C</navigator>

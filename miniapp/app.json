@@ -1,0 +1,13 @@
+{
+    "pages": [
+        "pages/A/A",
+        "pages/B/B",
+        "pages/C/C"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black"
+    }
+}

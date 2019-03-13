@@ -1,3 +1,5 @@
 <navigator url="/pages/B/B?abc=123" open-type="navigate" hover-class="className">navigate to B</navigator>
 
 <navigator url="/pages/B/B?abc=123" open-type="redirect" hover-class="className">redirect to B</navigator>
+
+<button bindtap='goMiniApp'>跳转到别人家的小程序</button>

@@ -1,3 +1,7 @@
 <navigator url="/pages/C/C" open-type="navigate" hover-class="className">navigate to C</navigator>
 
 <navigator url="/pages/C/C" open-type="redirect" hover-class="className">redirect to C</navigator>
+
+<view bindtap="clickText">
+    <text catchtap="catchText" data-value="{{item}}" wx:key="{{item}}" wx:for="{{list}}" class="item">{{item}}</text>
+</view>

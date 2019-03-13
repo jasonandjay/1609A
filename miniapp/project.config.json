@@ -28,13 +28,31 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "B页面",
+					"pathName": "pages/B/B",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "C页面",
+					"pathName": "pages/C/C",
+					"scene": null
+				}
+			]
 		}
 	}
 }

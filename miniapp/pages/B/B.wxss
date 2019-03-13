@@ -1,1 +1,12 @@
-/* pages/B/B.wxss */
+.item{
+    display: block;
+    width: 100%;
+    height: 200rpx;
+    border-bottom: 1px solid #eee;
+}
+text{
+    font-size: 40rpx;
+    color: #333;
+    text-align: center;
+    line-height: 200rpx;
+}

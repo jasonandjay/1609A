@@ -1,11 +1,10 @@
 // pages/a/a.js
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-
+        list: []
     },
 
     /**
@@ -28,6 +27,11 @@ Page({
      */
     onShow: function () {
         console.log('onShowB...', this.options);
+        let list = [];
+        for (let i=0,len=10;i<len;i++){
+            list.push(i);
+        }
+        this.setData({list});
     },
 
     /**
@@ -51,11 +55,31 @@ Page({
 
     },
 
+    clickText(e){
+        console.log('e...', e);
+        let value = e.target.dataset.value;
+        wx.showToast({
+          title: '点击了标签： '+value, //提示的内容,
+          icon: 'none', //图标,
+          duration: 2000, //延迟时间,
+          mask: true, //显示透明蒙层，防止触摸穿透,
+        });
+    },
+
+    catchText(){
+
+    },
+
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachaottom: function () {
-
+    onReachBottom: function () {
+        let list = this.data.list,
+            length = this.data.list.length;
+        for (let i=0,len=10; i<len; i++){
+            list.push(length+i);
+        }
+        this.setData({list})
     },
 
     /**

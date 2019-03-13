@@ -6,8 +6,28 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
+        "navigationBarBackgroundColor": "#ff4d6a",
         "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black"
-    }
+        "navigationBarTextStyle": "white",
+        "backgroundColor": "#eee"
+    },
+    "tabBar": {
+        "position": "bottom",
+        "selectedColor": "red",
+        "list": [
+            {
+                "pagePath": "pages/A/A",
+                "text": "A"
+            },
+            {
+                "pagePath": "pages/B/B",
+                "text": "B"
+            },
+            {
+                "pagePath": "pages/C/C",
+                "text": "C"
+            }
+        ]
+    },
+    "navigateToMiniProgramAppIdList": ["wx498804a16e220d3c"]
 }

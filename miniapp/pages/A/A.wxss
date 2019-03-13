@@ -1,1 +1,3 @@
-/* pages/A/A.wxss */
+navigator{
+    height: 1000rpx;
+}

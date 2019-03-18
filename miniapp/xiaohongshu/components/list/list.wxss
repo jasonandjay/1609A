@@ -1,4 +1,4 @@
-/* .index{
+.index{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -14,4 +14,4 @@ image{
 .avatar{
     width: 60rpx;
     border-radius: 50%;
-} */
+}

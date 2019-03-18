@@ -1,26 +1,15 @@
 import {request} from '../../utils/util.js';
 
+let app = getApp();
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        list: []
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+        list: [],
+        showList: true
     },
 
     /**
@@ -32,13 +21,25 @@ Page({
         this.setData({
             list: data.data
         })
+        console.log('app...', app);
+        // 控制list组件的显示和隐藏
+        // setInterval(()=>{
+        //     this.setData({
+        //         showList: !this.data.showList
+        //     })
+        // }, 1000);
     },
 
     // 跳转详情
     goDetail(e){
-        wx.navigateTo({
-            url: '/pages/index/detail/detail?id='+e.currentTarget.dataset.id,
-        })
+        console.log('index e...', e);
+       wx.showToast({
+           title: e.detail.currentTarget.dataset.id,
+           icon: 'none'
+       })
+        // wx.navigateTo({
+        //     url: '/pages/index/detail/detail?id='+e.currentTarget.dataset.id,
+        // })
     },
 
     // 封装获取分类数组的方法

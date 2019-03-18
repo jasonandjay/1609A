@@ -1,5 +1,5 @@
-<view class="index">
-    <!-- <view wx:for="{{list}}" wx:key="{{index}}" class="item"  data-id="{{item.id}}" catchtap='goDetail'>
+<view class="container">
+    <view wx:for="{{list}}" wx:key="{{index}}" class="item"  data-id="{{item.id}}" catchtap='goDetail'>
         <image src="{{item.images_list[0].url}}" mode="widthFix"/>
         <text>{{item.title}}</text>
         <view>
@@ -7,8 +7,5 @@
             <text>{{item.user.nickname}}</text>
             <text>点赞数： {{item.likes}}</text>
         </view>
-    </view> -->
-
-    <list list="{{list}}" bindGoDetail="goDetail"></list>
-    <!-- <list wx:if="{{showList}}"/> -->
+    </view>
 </view>

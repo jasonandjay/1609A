@@ -8,6 +8,10 @@ export default {
       wx.setStorageSync('location', location)
       console.log('location...', location);
     })
+    // 调用登陆获取code
+    wx.login({
+      success: res=>console.log('res...', res)
+    })
   }
 }
 </script>

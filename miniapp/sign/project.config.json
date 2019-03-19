@@ -2,10 +2,11 @@
 	"description": "项目配置文件。",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
+		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
@@ -20,13 +21,24 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "匹配地址",
+					"pathName": "pages/search/main",
+					"scene": null
+				}
+			]
 		}
 	}
 }

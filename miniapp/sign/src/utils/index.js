@@ -64,9 +64,22 @@ export function getAuth(scope, callback) {
   })
 }
 
+// 节流去抖
+export function debounce(func, delay){
+  var timer=null;
+  return function(){
+    var context=this, args=arguments;
+    clearTimeout(timer);
+    timer=setTimeout(function(){
+      func.apply(context,args);
+    }, delay);
+  }
+}
+
 export default {
   formatNumber,
   formatTime,
   getLocation,
-  getAuth
+  getAuth,
+  debounce
 }

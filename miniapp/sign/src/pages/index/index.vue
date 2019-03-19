@@ -41,8 +41,8 @@ export default {
       markers: [{
         iconPath: '/static/images/job.png',
         id: 0,
-        latitude: 23.099994,
-        longitude: 113.324520,
+        latitude: 40.03298,
+        longitude: 116.29891,
         width: 50,
         height: 50
       }]

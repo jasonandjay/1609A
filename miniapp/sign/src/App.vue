@@ -1,17 +1,26 @@
 <script>
-import {getLocation, getAuth} from './utils/index.js'
+import {getLocation, getAuth} from '@/utils/index.js'
+import {login} from '@/api/index'
+
 export default {
   created () {
     // 用户一打开小程序，就做定位
-    getAuth('scope.userLocation', async ()=>{
-      let location = await getLocation();
-      wx.setStorageSync('location', location)
-      console.log('location...', location);
-    })
-    // 调用登陆获取code
-    wx.login({
-      success: res=>console.log('res...', res)
-    })
+    // getAuth('scope.userLocation', async ()=>{
+    //   let location = await getLocation();
+    //   wx.setStorageSync('location', location)
+    //   console.log('location...', location);
+    // })
+    let openid = wx.getStorageSync('openid');
+    // if (!openid){
+      // 调用登陆获取code
+      wx.login({
+        success: async res=>{
+          console.log('res...', res);
+          let data = await login(res.code);
+          wx.setStorageSync('openid', data.data.openid);
+        }
+      })
+    // }
   }
 }
 </script>

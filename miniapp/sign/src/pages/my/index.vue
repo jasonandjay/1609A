@@ -1,31 +1,6 @@
 <template>
-  <div @click="clickHandle" class="wrap">
-    <!-- 首页地图模块 -->
-    <map
-      id="map"
-      :longitude="location.longitude"
-      :latitude="location.latitude"
-      subkey="X7RBZ-MMOKR-UQEWJ-WSCXC-IVXVK-IFFLL"
-      scale="14"
-      show-location
-      show-compass
-      :markers="markers"
-      @markertap="markertap"
-      @regionchange="regionChange"
-    ></map>
-    <!-- 重新定位图标 -->
-    <cover-view class="current" @tap="goCurrent">
-      <cover-image class="location" src="/static/images/location.png" />
-      <cover-view class="my" @click="goMy">
-        <cover-image src="/static/images/my.png" />
-      </cover-view>
-    </cover-view>
-    <!-- vuex最简单的demo -->
-    <!-- <div>
-      <button @click="btnClick('+')">+</button>
-      <span>{{state}}</span>
-      <button @click="btnClick('-')">-</button>
-    </div> -->
+  <div class="wrap">
+    我的页面
   </div>
 </template>
 

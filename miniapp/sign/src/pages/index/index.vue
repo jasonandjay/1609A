@@ -17,12 +17,18 @@
     <cover-view class="current" @tap="goCurrent">
       <cover-image class="img" src="/static/images/location.png" />
     </cover-view>
+    <div>
+      <button @click="btnClick('+')">+</button>
+      <span>{{state}}</span>
+      <button @click="btnClick('-')">-</button>
+    </div>
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
 import {getLocation, getAuth} from '@/utils/index.js'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   data () {
@@ -43,11 +49,24 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      state: state=>state.index.count,
+      state2: state=>state.index.count,
+    })
+  },
+
   components: {
     card
   },
 
   methods: {
+    ...mapMutations({
+      changeNum: 'index/changeCount'
+    }),
+    btnClick(type){
+      this.changeNum(type);
+    },
     regionChange(e){
 
     },
@@ -77,6 +96,7 @@ export default {
   height: 100%;
 }
 map{
+  display: none;
   width: 100%;
   height: 100%;
 }

@@ -64,7 +64,7 @@ export function getAuth(scope, callback) {
   })
 }
 
-// 节流去抖
+// 函数去抖
 export function debounce(func, delay){
   var timer=null;
   return function(){

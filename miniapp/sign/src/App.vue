@@ -29,6 +29,9 @@ export default {
 page{
   height: 100%;
 }
+.hover{
+  background: #eee;
+}
 /* this rule will be remove */
 * {
   transition: width 2s;

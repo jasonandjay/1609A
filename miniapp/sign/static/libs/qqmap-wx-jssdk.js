@@ -1,6 +1,6 @@
 /**
  * 微信小程序JavaScriptSDK
- * 
+ *
  * @version 1.2
  * @date 2019-03-06
  * @author v_ylyue@tencent.com
@@ -303,7 +303,7 @@ var Utils = {
      */
     rad(d) {
       return d * Math.PI / 180.0;
-    },  
+    },
     /**
      * 处理终点location数组
      * @return 返回终点数组
@@ -377,7 +377,7 @@ var Utils = {
 
     /**
      * 验证param对应的key值是否为空
-     * 
+     *
      * @param {Object} param 接口参数
      * @param {String} key 对应参数的key
      */
@@ -393,7 +393,7 @@ var Utils = {
 
     /**
      * 验证参数中是否存在检索词keyword
-     * 
+     *
      * @param {Object} param 接口参数
      */
     checkKeyword(param){
@@ -402,7 +402,7 @@ var Utils = {
 
     /**
      * 验证location值
-     * 
+     *
      * @param {Object} param 接口参数
      */
     checkLocation(param) {
@@ -429,7 +429,7 @@ var Utils = {
     },
 
     /**
-     * 
+     *
      * 数据处理函数
      * 根据传入参数不同处理不同数据
      * @param {String} feature 功能名称
@@ -564,11 +564,11 @@ var Utils = {
         var districtByCity = data.result[0];
         param.success(data, districtByCity);
       } else if (feature == 'calculateDistance') {
-        var calculateDistanceResult = data.result.elements;  
+        var calculateDistanceResult = data.result.elements;
         var distance = [];
         for (var i = 0; i < calculateDistanceResult.length; i++){
           distance.push(calculateDistanceResult[i].distance);
-        }   
+        }
         param.success(data, {
           calculateDistanceResult: calculateDistanceResult,
           distance: distance
@@ -583,7 +583,7 @@ var Utils = {
 
     /**
      * 构造微信请求参数，公共属性处理
-     * 
+     *
      * @param {Object} param 接口参数
      * @param {Object} param 配置项
      * @param {String} feature 方法名
@@ -657,7 +657,7 @@ class QQMapWX {
 
     /**
      * 构造函数
-     * 
+     *
      * @param {Object} options 接口参数,key 为必选参数
      */
     constructor(options) {
@@ -671,7 +671,7 @@ class QQMapWX {
      * POI周边检索
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 参数对象结构可以参考
      * @see http://lbs.qq.com/webservice_v1/guide-search.html
      */
@@ -717,7 +717,7 @@ class QQMapWX {
           rectangle = options.rectangle;
         }
 
-        var locationsuccess = function (result) {        
+        var locationsuccess = function (result) {
           if (region && !rectangle) {
             //城市限定参数拼接
             requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";
@@ -735,7 +735,7 @@ class QQMapWX {
             if (options.sig) {
               requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');
             }
-            }            
+            }
             wx.request(Utils.buildWxRequestConfig(options, {
                 url: URL_SEARCH,
                 data: requestParam
@@ -748,7 +748,7 @@ class QQMapWX {
      * sug模糊检索
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 参数对象结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-suggestion.html
      */
@@ -790,7 +790,7 @@ class QQMapWX {
             wx.request(Utils.buildWxRequestConfig(options, {
               url: URL_SUGGESTION,
               data: requestParam
-            }, "suggest"));      
+            }, "suggest"));
           };
           Utils.locationProcess(options, locationsuccess);
         } else {
@@ -800,15 +800,15 @@ class QQMapWX {
           wx.request(Utils.buildWxRequestConfig(options, {
             url: URL_SUGGESTION,
             data: requestParam
-          }, "suggest"));      
-        }        
+          }, "suggest"));
+        }
     };
 
     /**
      * 逆地址解析
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 请求参数结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-gcoder.html
      */
@@ -843,7 +843,7 @@ class QQMapWX {
      * 地址解析
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 请求参数结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-geocoder.html
      */
@@ -882,7 +882,7 @@ class QQMapWX {
      * 获取城市列表
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 请求参数结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-region.html
      */
@@ -909,7 +909,7 @@ class QQMapWX {
      * 获取对应城市ID的区县列表
      *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 请求参数结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-region.html
      */
@@ -944,9 +944,9 @@ class QQMapWX {
      * 起点到终点最大限制直线距离10公里。
      *
      * 新增直线距离计算。
-     * 
+     *
      * @param {Object} options 接口参数对象
-     * 
+     *
      * 请求参数结构可以参考
      * http://lbs.qq.com/webservice_v1/guide-distance.html
      */
@@ -971,7 +971,7 @@ class QQMapWX {
         }
 
         //计算直线距离
-        if(requestParam.mode == 'straight'){        
+        if(requestParam.mode == 'straight'){
           var locationsuccess = function (result) {
             var locationTo = Utils.getEndLocation(requestParam.to);//处理终点坐标
             var data = {
@@ -993,19 +993,19 @@ class QQMapWX {
                   lat: locationTo[i].lat,
                   lng: locationTo[i].lng
                 }
-              });            
+              });
             }
             var calculateResult = data.result.elements;
             var distanceResult = [];
             for (var i = 0; i < calculateResult.length; i++) {
               distanceResult.push(calculateResult[i].distance);
-            }  
+            }
             return options.success(data,{
               calculateResult: calculateResult,
               distanceResult: distanceResult
             });
           };
-          
+
           Utils.locationProcess(options, locationsuccess);
         } else {
           var locationsuccess = function (result) {
@@ -1020,14 +1020,14 @@ class QQMapWX {
           };
 
           Utils.locationProcess(options, locationsuccess);
-        }      
+        }
     };
 
   /**
    * 路线规划：
-   * 
+   *
    * @param {Object} options 接口参数对象
-   * 
+   *
    * 请求参数结构可以参考
    * https://lbs.qq.com/webservice_v1/guide-road.html
    */
@@ -1103,7 +1103,7 @@ class QQMapWX {
       if (options.policy) {
         requestParam.policy = options.policy;
       }
-    } 
+    }
 
     var locationsuccess = function (result) {
       requestParam.from = result.latitude + ',' + result.longitude;

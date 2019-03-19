@@ -5,7 +5,7 @@
       <input type="text" placeholder="面试地址" v-model="address">
     </header>
     <ul>
-      <li v-for="(item, index) in suggestion" :key="index"> 
+      <li v-for="(item, index) in suggestion" :key="index" hover-class="hover">
         <p>{{item.title}}</p>
         <p>{{item.address}}</p>
       </li>
@@ -64,10 +64,33 @@ export default {
 header{
   display: flex;
   align-items: center;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  height: 88rpx;
   span{
-    width: 30%;
+    width: 26%;
+    text-align: center;
     box-sizing: border-box;
     border-right: 1px solid #eee;
+  }
+  input{
+    padding: 0 20rpx;
+  }
+}
+li{
+  height: 100rpx;
+  padding: 10rpx 0 10rpx 100rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  p:nth-child(1){
+    font-size: 34rpx;
+  }
+  p:nth-child(2){
+    font-size: 24rpx;
+    color: #c0c0c0;
   }
 }
 </style>

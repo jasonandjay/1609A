@@ -4,11 +4,11 @@
     <ul>
       <li>
         <lable for="">公司名称</lable>
-        <input type="text" v-model="info.company" placeholder="请输入公司名称">
+        <input type="text" v-model="current.company" placeholder="请输入公司名称">
       </li>
        <li>
         <lable for="">公司电话</lable>
-        <input type="number" v-model="info.phone" placeholder="请输入面试联系人电话">
+        <input type="number" v-model="current.phone" placeholder="请输入面试联系人电话" maxlength="11">
       </li>
        <li>
         <lable for="">面试时间</lable>
@@ -23,18 +23,18 @@
       </li>
        <li>
         <lable for="">面试地址</lable>
-        <input @tap="goSearch" type="text" disabled v-model="info.address" placeholder="请选择面试地址">
+        <input @tap="goSearch" type="text" disabled v-model="current.address.address" placeholder="请选择面试地址">
       </li>
     </ul>
     <p>备注信息</p>
-    <textarea type="text" v-model="info.phone" placeholder="备注信息(100个字内)"/>
-    <button>确认</button>
+    <textarea type="text" v-model="current.description" placeholder="备注信息(可选，100个字以内)"/>
+    <button :class="btnEnable?'': 'disable'" @click="submit">确认</button>
   </div>
 </template>
 
 
 <script>
-import {getLocation, getAuth} from '@/utils/index.js'
+import {mapState, mapActions} from 'vuex';
 const moment = require('moment');
 
 const range = [
@@ -45,7 +45,6 @@ const range = [
 export default {
   data () {
     return {
-      // dateRange: range,
       info: {
         date: [0,0,0],
       }
@@ -58,6 +57,26 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      current: state=>state.interview.current
+    }),
+    // 按钮是否可点击
+    btnEnable(){
+      // 判断公司名称是否为空
+      if (!this.current.company){
+        return false;
+      }
+      // 判断手机号是否符合规范
+      if (!/^1(3|4|5|7|8)\d{9}$/.test(this.current.phone) || !/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.current.phone)){
+        return false;
+      }
+      // 判断公司地址
+      if (!this.current.address.address){
+        return false;
+      }
+      return true;
+    },
+    // 处理面试日期
     dateRange(){
       let dateRange = [...range];
       // 如果时间是今天，过滤掉现在之前的小时
@@ -78,23 +97,60 @@ export default {
       })
       return dateRange;
     },
+    // 显示的日期
     dateShow(){
       return moment()
-      .add(this.info.date[0]-1, 'd')
+      .add(this.info.date[0], 'd')
       .add(this.info.date[1]+1, 'h')
       .minute(this.info.date[2]*10)
       .format('YYYY-MM-DD HH:mm');
     }
   },
   methods: {
+    ...mapActions({
+      submitInterview: 'interview/submit'
+    }),
+    // 监听多列选择器每列变化
     columnChange(e){
       let {column, value} = e.target;
       let date = [...this.info.date];
       date[column] = value;
       this.info.date = date;
     },
+    // 去选择地址
     goSearch(){
       wx.navigateTo({ url: '/pages/search/main' });
+    },
+    // 提交添加面试
+    async submit(){
+      // 判断公司名称是否为空
+      if (!this.current.company){
+        wx.showToast({
+          title: '请输入公司名称', //提示的内容,
+          icon: 'none', //图标,
+        });
+        return false;
+      }
+      // 判断手机号是否符合规范
+      if (!/^1(3|4|5|7|8)\d{9}$/.test(this.current.phone) || !/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(this.current.phone)){
+        wx.showToast({
+          title: '请输入面试联系人的手机或座机', //提示的内容,
+          icon: 'none', //图标,
+        });
+        return false;
+      }
+      // 判断公司地址
+      if (!this.current.address.address){
+        wx.showToast({
+          title: '请选择公司地址', //提示的内容,
+          icon: 'none', //图标,
+        });
+        return false;
+      }
+      // 添加时间戳到表单
+      this.current.start_time = moment(this.dateShow).unix();
+      let data = await this.submitInterview(this.current);
+      console.log('data...', data);
     }
   }
 }
@@ -133,6 +189,11 @@ li{
     // background: #eee;
     color: #333;
     height: 88rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 30rpx;
+    box-sizing: border-box;
   }
   .date{
     width: 100%;
@@ -158,5 +219,8 @@ button{
   margin-top: 50rpx;
   color: #fff;
   background: #197DBF;
+}
+button.disable{
+  background: #999;
 }
 </style>

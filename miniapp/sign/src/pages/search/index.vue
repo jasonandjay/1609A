@@ -5,7 +5,7 @@
       <input type="text" placeholder="面试地址" v-model="address">
     </header>
     <ul>
-      <li v-for="(item, index) in suggestion" :key="index" hover-class="hover">
+      <li v-for="(item, index) in suggestion" :key="index" hover-class="hover" @click="select(index)">
         <p>{{item.title}}</p>
         <p>{{item.address}}</p>
       </li>
@@ -15,7 +15,7 @@
 
 <script>
 import {debounce} from '@/utils/index.js'
-import {mapState, mapMutations} from 'vuex'
+import {mapMutations} from 'vuex'
 
 export default {
   data () {
@@ -25,14 +25,8 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState({
-      state: state=>state.index.count,
-      state2: state=>state.index.count,
-    })
-  },
-
   watch: {
+    // 监听input框变化，调用智能提示
     address(val, oldVal){
       this.search(val);
     }
@@ -40,12 +34,22 @@ export default {
 
   methods: {
     ...mapMutations({
-      changeNum: 'index/changeCount'
-    })
+      updateState: 'interview/updateState'
+    }),
+    select(index){
+      console.log('index...', index);
+      // 更新当前地址
+      this.updateState({
+        address: this.suggestion[index]
+      })
+      // 返回上一页
+      wx.navigateBack();
+    }
   },
 
   created () {
     var that = this;
+    // 使用函数防抖控制事件触发频率
     this.search = debounce((val)=>{
       this.$map.search({
         keyword: val,

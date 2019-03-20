@@ -1,16 +1,18 @@
 <template>
   <div class="wrap">
     <header>
-      <image src="/static/images/logo.png" lazy-load="false"></image>
+      <div class="avatar">
+        <image src="/static/images/my.png" lazy-load="false"></image>
+      </div>
       <p>176****6605</p>
     </header>
     <ul>
       <li>
-        <icon type="waiting" size="24px" />
+        <icon type="waiting" size="18px" />
         <span>
           我的面试
         </span>
-        <span>〉</span>
+        <image src="/static/images/arrow.svg"></image>
       </li>
     </ul>
     <div class="phone" v-if="showPhoneDialog">
@@ -55,14 +57,24 @@ export default {
 header{
   background: #F4F6F9;
   width: 100%;
-  height: 400rpx;
+  height: 350rpx;
+  box-sizing: border-box;
+  padding: 50rpx 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  image{
+  .avatar{
     width: 100rpx;
-    height: 100rpx;;
+    height: 100rpx;
+    background: #fff;
+    text-align: center;
+    padding: 20rpx;
+    border-radius: 50%;
+  }
+  image{
+    width: 90%;
+    height: 90%;
   }
 }
 .phone{
@@ -82,6 +94,24 @@ header{
   }
   button{
     width: 60%;
+  }
+}
+li{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 50rpx 40rpx 0 40rpx;
+  span:nth-child(2){
+    flex: 1;
+    margin-left: 40rpx;
+    color: #666;
+    font-size: 36rpx;
+  }
+  image{
+    width: 40rpx;
+    height: 40rpx;
   }
 }
 </style>

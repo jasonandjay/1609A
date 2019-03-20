@@ -1,110 +1,87 @@
 <template>
   <div class="wrap">
-    我的页面
+    <header>
+      <image src="/static/images/logo.png" lazy-load="false"></image>
+      <p>176****6605</p>
+    </header>
+    <ul>
+      <li>
+        <icon type="waiting" size="24px" />
+        <span>
+          我的面试
+        </span>
+        <span>〉</span>
+      </li>
+    </ul>
+    <div class="phone" v-if="showPhoneDialog">
+      <p>为了更好的使用我们的服务，我们需要获取你的手机号码</p>
+      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">允许获取手机号</button>
+    </div>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
 import {getLocation, getAuth} from '@/utils/index.js'
 import {mapState, mapMutations} from 'vuex'
 
 export default {
   data () {
     return {
-      // 用户当前位置
-      location: {
-        latitude: 40.03298,
-        longitude: 116.29891
-      },
-      markers: [{
-        iconPath: '/static/images/job.png',
-        id: 0,
-        latitude: 40.03298,
-        longitude: 116.29891,
-        width: 50,
-        height: 50
-      }]
+      showPhoneDialog: true
     }
   },
 
   computed: {
     ...mapState({
-      state: state=>state.index.count,
-      state2: state=>state.index.count,
+      info: state=>state.info
     })
   },
 
-  components: {
-    card
-  },
-
   methods: {
-    ...mapMutations({
-      changeNum: 'index/changeCount'
-    }),
-    btnClick(type){
-      this.changeNum(type);
-    },
-    regionChange(e){
-
-    },
-    // 点击标注物
-    marketTap(e){
-
-    },
-    // 重新定位
-    goCurrent(){
-      getAuth('scope.userLocation', async ()=>{
-        let location = await getLocation();
-        wx.setStorageSync('location', location)
-        this.location = location;
-      })
-    },
-    // 去我的页面
-    goMy(){
-      wx.navigateTo({ url: '/pages/my/main' });
+    getPhoneNumber(e){
+      console.log('e...', e);
     }
   },
 
-  created () {
-    let location = wx.getStorageSync('location');
-    this.location = location;
+  onShow() {
+    if (!this.info.phone){
+      this.showPhoneDialog = false;
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.wrap{
-  height: 100%;
+header{
+  background: #F4F6F9;
+  width: 100%;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  image{
+    width: 100rpx;
+    height: 100rpx;;
+  }
 }
-map{
+.phone{
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-}
-.location{
-  position: fixed;
-  bottom: 100rpx;
-  width: 80rpx;
-  height: 80rpx;
-  left: 20rpx;
-}
-.my{
-  position: fixed;
-  background: #fff;
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
-  bottom: 100rpx;
-  width: 120rpx;
-  height: 90rpx;
-  right: 0;
-  cover-image{
-    width: 70rpx;
-    height: 70rpx;
-    margin-top:10rpx;
-    margin-left:20rpx;
-    background: #eee;
-    border-radius: 50%;
+  background: rgba(0,0,0, .3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  p{
+    width: 60%;
+    background: #fff;
+  }
+  button{
+    width: 60%;
   }
 }
 </style>

@@ -116,7 +116,7 @@ map{
 }
 .location{
   position: fixed;
-  bottom: 150rpx;
+  bottom: 160rpx;
   width: 80rpx;
   height: 80rpx;
   left: 20rpx;
@@ -142,10 +142,10 @@ map{
   height: 100rpx;
   right: 0;
   cover-image{
-    width: 70rpx;
-    height: 70rpx;
-    margin-top:15rpx;
-    margin-left: 15rpx;
+    width: 80rpx;
+    height: 80rpx;
+    margin-top: 10rpx;
+    margin-left: 10rpx;
     background: #eee;
     border-radius: 50%;
   }

@@ -153,11 +153,16 @@ export default {
       console.log('data...', data);
       // 处理添加结果
       if (data.code == 0){
-        wx.showToast({
-          title: '添加面试成功', //提示的内容,
-          icon: 'none', //图标,
+        wx.showModal({
+          title: '系统提示', //提示的标题,
+          content: data.msg, //提示的内容,
+          showCancel: false,
+          confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
+          confirmColor: '#197DBF', //确定按钮的文字颜色,
           success: res => {
-            wx.navigateTo({ url: '/pages/index/main' });
+            if (res.confirm) {
+             wx.navigateTo({ url: '/pages/index/main' });
+            }
           }
         });
       }else{

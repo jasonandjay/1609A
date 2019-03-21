@@ -5,11 +5,13 @@ import createLogger from 'vuex/dist/logger';
 // 挂载modules
 import index from './modules/index'
 import interview from './modules/interview'
+import sign from './modules/sign'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    sign,
     index,
     interview
   },

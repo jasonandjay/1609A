@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import card from '@/components/card'
 import {getLocation, getAuth} from '@/utils/index.js'
 import {mapState, mapMutations} from 'vuex'
 
@@ -59,10 +58,6 @@ export default {
       state: state=>state.index.count,
       state2: state=>state.index.count,
     })
-  },
-
-  components: {
-    card
   },
 
   methods: {
@@ -93,7 +88,7 @@ export default {
     },
     // 去添加面试页面
     goAdd(){
-      wx.navigateTo({ url: '/pages/add/main' });
+      wx.navigateTo({ url: '/pages/sign/add/main' });
     }
   },
 

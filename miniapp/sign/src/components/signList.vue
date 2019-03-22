@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <ul v-if="list.length">
-      <li v-for="(item, index) in list" :key="index">
+      <li v-for="item in list" :key="item.id" @click="goDetail(item.id)">
         <p>
           <span>{{item.company}}</span>
           <span :class="'tag'+(item.status+2)">{{item.status?item.status==1?'已放弃':'未开始':'已打卡'}}</span>
@@ -25,6 +25,11 @@ export default {
     list: {
       type: Array,
       default: []
+    }
+  },
+  methods: {
+    goDetail(id){
+      wx.navigateTo({ url: '/pages/sign/detail/main?id='+id });
     }
   }
 }
@@ -71,7 +76,7 @@ li{
   p:nth-child(3){
     font-size: 34rpx;
     color: #666;
-    span{
+    span:last-child{
       padding: 5rpx 10rpx;
     }
   }

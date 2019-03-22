@@ -5,7 +5,8 @@ export let fly = new Fly
 //设置超时
 fly.config.timeout=10000;
 //设置请求基地址
-fly.config.baseURL="http://123.206.55.50:7001/"
+// fly.config.baseURL="http://123.206.55.50:7001/"
+fly.config.baseURL="http://169.254.12.68:7001/"
 
 const HOST = 'https://127.0.0.1' // 更改
 //添加请求拦截器

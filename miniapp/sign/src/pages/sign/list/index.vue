@@ -4,6 +4,7 @@
       <span @click="tabChange(index)" v-for="(item, index) in types" :key="index" :class="active===index?'active':''">{{item}}</span>
     </header>
     <signList :list="list"></signList>
+    <p class="more" v-if="list.length">{{hasMore?'上拉加载更多': '我是有底线的'}}</p>
   </div>
 </template>
 
@@ -21,7 +22,8 @@ export default {
     ...mapState({
       active: state=>state.sign.active,
       list: state=>state.sign.list,
-      page: state=>state.sign.page
+      page: state=>state.sign.page,
+      hasMore: state=>state.sign.hasMore
     })
   },
   methods: {
@@ -43,8 +45,10 @@ export default {
     this.getList();
   },
   onReachBottom(){
-    this.updateState({page: this.page+1});
-    this.getList();
+    if (this.hasMore){
+      this.updateState({page: this.page+1});
+      this.getList();
+    }
   }
 }
 
@@ -77,5 +81,13 @@ header{
     font-weight: 500;
     border-bottom: 3rpx solid #197DBF;
   }
+}
+.more{
+  text-align: center;
+  font-size: 32rpx;
+  line-height: 2;
+  color: #999;
+  // border-bottom: 20rpx solid #eee;
+  border-top: 20rpx solid #eee;
 }
 </style>

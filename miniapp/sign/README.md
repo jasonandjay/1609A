@@ -42,10 +42,10 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 - [x]  定位功能
 - [x] 我的功能
     - [ ] 绑定手机号
-- [ ] 面试功能
-    - [ ] 添加面试
-    - [ ] 面试列表
-    - [ ] 面试详情
+- [x] 面试功能
+    - [x] 添加面试
+    - [x] 面试列表
+    - [x] 面试详情
     - [ ] 面试分享
     - [ ] 面试推送
     - [ ] 打卡功能

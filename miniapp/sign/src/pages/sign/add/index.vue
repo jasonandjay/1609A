@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <form @submit="submit" report-submit>
     <p>面试信息</p>
     <ul>
       <li>
@@ -28,8 +28,8 @@
     </ul>
     <p>备注信息</p>
     <textarea type="text" v-model="current.description" placeholder="备注信息(可选，100个字以内)"/>
-    <button :class="btnEnable?'': 'disable'" @click="submit">确认</button>
-  </div>
+    <button :class="btnEnable?'': 'disable'" form-type="submit">确认</button>
+  </form>
 </template>
 
 
@@ -122,7 +122,8 @@ export default {
       wx.navigateTo({ url: '/pages/search/main' });
     },
     // 提交添加面试
-    async submit(){
+    async submit(e){
+      console.log('e...', e);
       // 判断公司名称是否为空
       if (!this.current.company){
         wx.showToast({
@@ -149,6 +150,8 @@ export default {
       }
       // 添加时间戳到表单
       this.current.start_time = moment(this.dateShow).unix();
+      // 添加form_id
+      this.current.form_id = e.target.formId;
       let data = await this.submitInterview(this.current);
       console.log('data...', data);
       // 处理添加结果

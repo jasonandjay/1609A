@@ -11,7 +11,7 @@
       </li>
       <li>
         <label for="">联系方式：</label>
-        <span @click="makePhone">{{info.phone || 15210420735}}</span>
+        <span @click="makePhone">{{info.phone}}</span>
       </li>
       <li>
         <label for="">是否提醒：</label>
@@ -21,12 +21,12 @@
         <label for="">面试状态：</label>
         <span>{{info.status==-1?'未开始':info.status==0?'已打卡': '已放弃'}}</span>
       </li>
-      <li v-if="info.status==-1">
+      <li v-if="info.status==-1 && !data.view">
         <label for="">取消提醒：</label>
-         <switch :checked="info.remind==1" @change="cancelRemind" />
+         <switch :checked="info.remind===1" @change="cancelRemind" />
       </li>
     </ul>
-    <section v-if="info.status==-1" class="action">
+    <section v-if="info.status==-1 && !data.view" class="action">
       <button @click="goSign">去打卡</button>
       <button @click="giveup">放弃面试</button>
     </section>
@@ -38,6 +38,13 @@
 import {mapState, mapActions} from "vuex";
 
 export default {
+  data(){
+    return {
+      data: {
+        // view: false
+      }
+    }
+  },
   computed: {
     ...mapState({
       info: state=>state.sign.info
@@ -71,31 +78,38 @@ export default {
         }
       });
     },
-    cancelMind(){
-       wx.showModal({
-        title: '温馨提示', //提示的标题,
-        content: '取消提醒，后续将接收不到到本次面试提醒', //提示的内容,
-        success: res => {
-          if (res.confirm) {
-            console.log('用户点击确定')
-          }
-        }
-      });
+    cancelRemind(e){
+      // 取消提醒
+      this.updateDetail({
+        id: this.id,
+        params: {remind: e.target.value?1:-1}
+      })
     }
   },
   onLoad(options){
     // 获取id
     this.id = options.id;
+    // 把view属性加到响应监听里面
+    this.$set(this.data, 'view', options.view || false)
   },
   async onShow(){
-    // wx.showLoading({
-    //   title: '加载数据中...', //提示的内容,
-    //   mask: true, //显示透明蒙层，防止触摸穿透,
-    // });
+    wx.showLoading({
+      title: '加载数据中...', //提示的内容,
+      mask: true, //显示透明蒙层，防止触摸穿透,
+    });
     await this.getDetail(this.id);
     // 修改标题
     wx.setNavigationBarTitle({ title: this.info.company });
     wx.hideLoading();
+  },
+  onShareAppMessage() {
+    return {
+      title: this.info.company+'的面试',
+      path: '/pages/sign/detail/main?view=1&id='+this.id,
+      success: res => {},
+      fail: () => {},
+      complete: () => {}
+    };
   }
 }
 </script>
@@ -132,6 +146,9 @@ li{
     padding-right: 30rpx;
     box-sizing: border-box;
   }
+}
+li:last-child{
+  border-bottom: none;
 }
 .action{
   display: flex;

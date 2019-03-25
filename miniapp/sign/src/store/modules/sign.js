@@ -70,7 +70,6 @@ const actions = {
   updateDetail({commit,dispatch}, payload){
     return new Promise(async (resolve, reject)=>{
       let data = await updateSignDetail(payload.id, payload.params);
-      console.log('data...', data);
       if (data.code == 0){
         // 重新获取详情
         dispatch('getDetail', payload.id);
@@ -81,7 +80,7 @@ const actions = {
 }
 
 function formatTime(start_time){
-  return moment(start_time*1000).format('YYYY-MM-DD HH:mm');
+  return moment(start_time*1).format('YYYY-MM-DD HH:mm');
 }
 
 export default {

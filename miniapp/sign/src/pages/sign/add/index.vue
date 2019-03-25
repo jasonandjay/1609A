@@ -149,7 +149,7 @@ export default {
         return false;
       }
       // 添加时间戳到表单
-      this.current.start_time = moment(this.dateShow).unix();
+      this.current.start_time = moment(this.dateShow).unix()*1000;
       // 添加form_id
       this.current.form_id = e.target.formId;
       let data = await this.submitInterview(this.current);

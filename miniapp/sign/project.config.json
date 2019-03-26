@@ -30,12 +30,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "匹配地址",
-					"pathName": "pages/search/main",
+					"pathName": "pages/sign/search/main",
 					"query": "",
 					"scene": null
 				},

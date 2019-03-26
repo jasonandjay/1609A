@@ -37,11 +37,11 @@ export default {
 
 <style lang="scss" scoped>
 .wrap{
-  margin-top: 88rpx;
+  padding-top: 88rpx;
 }
 li{
   border-top: 20rpx solid #eee;
-  margin-top: 20rpx;
+  // margin-top: 20rpx;
   width: 100%;
   padding: 10rpx 30rpx;
   box-sizing: border-box;

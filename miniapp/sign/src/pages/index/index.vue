@@ -12,14 +12,15 @@
       :markers="markers"
       @markertap="markertap"
       @regionchange="regionChange"
-    ></map>
+    >
+    </map>
     <!-- 重新定位图标 -->
     <cover-view class="current">
       <cover-image class="location" @tap="goCurrent" src="/static/images/location.png" />
       <button class="add" @tap="goAdd">添加面试</button>
-      <cover-view class="my" @tap="goMy">
-        <cover-image src="/static/images/my.png" />
-      </cover-view>
+      <button class="my" @tap="goMy">
+        <cover-image src="/static/images/my.png"/>
+      </button>
     </cover-view>
     <!-- vuex最简单的demo -->
     <!-- <div>
@@ -42,14 +43,15 @@ export default {
         latitude: 40.03298,
         longitude: 116.29891
       },
-      markers: [{
-        iconPath: '/static/images/job.png',
-        id: 0,
-        latitude: 40.03298,
-        longitude: 116.29891,
-        width: 50,
-        height: 50
-      }]
+      markers: []
+      // markers: [{
+      //   iconPath: '/static/images/job.png',
+      //   id: 0,
+      //   latitude: 40.03298,
+      //   longitude: 116.29891,
+      //   width: 50,
+      //   height: 50
+      // }]
     }
   },
 
@@ -109,6 +111,13 @@ map{
   padding-bottom: 100rpx;
   box-sizing: border-box;
 }
+.current{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 240rpx;
+}
 .location{
   position: fixed;
   bottom: 160rpx;
@@ -129,19 +138,19 @@ map{
 }
 .my{
   position: fixed;
-  background: #fff;
-  border-top-left-radius: 50rpx;
-  border-bottom-left-radius: 50rpx;
+  display: inline-block;
+  // background: #fff;
+  // border-radius: 50rpx 0 0 50rpx;
   bottom: 150rpx;
+  right: 0;
   width: 120rpx;
   height: 100rpx;
-  right: 0;
   cover-image{
     width: 80rpx;
     height: 80rpx;
     margin-top: 10rpx;
     margin-left: 10rpx;
-    background: #eee;
+    background: #000;
     border-radius: 50%;
   }
 }

@@ -4,7 +4,7 @@
     <ul>
       <li>
         <lable for="">公司名称</lable>
-        <input type="text" v-model="current.company" placeholder="请输入公司名称">
+        <input type="text" v-model="current.company" placeholder="请输入公司名称" focus>
       </li>
        <li>
         <lable for="">公司电话</lable>
@@ -119,7 +119,7 @@ export default {
     },
     // 去选择地址
     goSearch(){
-      wx.navigateTo({ url: '/pages/search/main' });
+      wx.navigateTo({ url: '/pages/sign/search/main' });
     },
     // 提交添加面试
     async submit(e){

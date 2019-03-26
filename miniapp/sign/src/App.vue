@@ -33,20 +33,20 @@ export default {
 </script>
 
 <style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
 page{
   height: 100%;
 }
 .hover{
   background: #eee;
+}
+button{
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+button::after{
+  border: none;
 }
 /* this rule will be remove */
 * {

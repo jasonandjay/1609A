@@ -4,7 +4,7 @@
       <div class="avatar">
         <image src="/static/images/my.png" lazy-load="false"></image>
       </div>
-      <p>176****6605</p>
+      <p>{{formatPhone}}</p>
     </header>
     <ul>
       <li @click="goSignList">
@@ -14,34 +14,54 @@
         </span>
         <image src="/static/images/arrow.svg"></image>
       </li>
+      <button open-type="contact" class="concat">
+        <icon type="info" size="18px" />
+        <span>客服中心</span>
+        <image src="/static/images/arrow.svg"></image>
+      </button>
     </ul>
-    <div class="phone" v-if="showPhoneDialog">
+    <div class="phone" v-if="showPhoneDialog" @click="showPhoneDialog=false">
       <p>为了更好的使用我们的服务，我们需要获取你的手机号码</p>
-      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">允许获取手机号</button>
+      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">同意</button>
     </div>
   </div>
 </template>
 
 <script>
 import {getLocation, getAuth} from '@/utils/index.js'
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   data () {
     return {
-      showPhoneDialog: true
+      showPhoneDialog: false
     }
   },
 
   computed: {
     ...mapState({
-      info: state=>state.info
-    })
+      info: state=>state.info,
+      phone: state=>state.user.phone
+    }),
+    formatPhone(){
+      let phone = this.info.phone || this.phone;
+      if (phone){
+        return phone.slice(0,3)+'****'+phone.slice(7,11)
+      }else{
+        return '************';
+      }
+    }
   },
 
   methods: {
-    getPhoneNumber(e){
-      console.log('e...', e);
+    ...mapActions({
+      bindPhoneNumber: 'user/getPhoneNumber'
+    }),
+    async getPhoneNumber(e){
+      let data = await this.bindPhoneNumber({
+        iv: e.target.iv,
+        encryptedData: e.target.encryptedData
+      })
     },
     goSignList(){
       wx.navigateTo({ url: '/pages/sign/list/main' });
@@ -49,8 +69,9 @@ export default {
   },
 
   onShow() {
+    console.log('this.info...', this.info);
     if (!this.info.phone){
-      this.showPhoneDialog = false;
+      this.showPhoneDialog = true;
     }
   }
 }
@@ -92,25 +113,38 @@ header{
   align-items: center;
   justify-content: center;
   p{
-    width: 60%;
-    background: #fff;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    width:70%;
+    background:#fff;
+    padding:20rpx 15rpx;
+    line-height: 1.5;
+    font-size:34rpx;
+    box-sizing:border-box;
   }
   button{
-    width: 60%;
+    width: 70%;
+    background: #197DBF;
+    color: #fff;
+    border-bottom-left-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
   }
 }
-li{
+li,button.concat{
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 50rpx 40rpx 0 40rpx;
+  padding: 30rpx 40rpx;
+  border-bottom: 1rpx solid #eee;
   span:nth-child(2){
     flex: 1;
     margin-left: 40rpx;
     color: #666;
     font-size: 36rpx;
+    background: transparent;
+    text-align: left;
   }
   image{
     width: 40rpx;

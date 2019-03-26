@@ -7,7 +7,7 @@ const state = {
   info: {}, //面试详情数据
   hasMore: true,  //是否有更多数据
   page: 1, //当前页码
-  pageSize: 3 //每页数据
+  pageSize: 10 //每页数据
 }
 
 const mutations = {

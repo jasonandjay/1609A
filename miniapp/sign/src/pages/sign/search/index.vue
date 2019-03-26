@@ -2,12 +2,15 @@
   <div class="wrap">
     <header>
       <span>北京</span>
-      <input type="text" placeholder="面试地址" v-model="address">
+      <input type="text" placeholder="面试地址" v-model="address" focus>
     </header>
     <ul>
       <li v-for="(item, index) in suggestion" :key="index" hover-class="hover" @click="select(index)">
-        <p>{{item.title}}</p>
-        <p>{{item.address}}</p>
+        <image src="/static/images/location.svg"></image>
+        <div>
+          <p>{{item.title}}</p>
+          <p>{{item.address}}</p>
+        </div>
       </li>
     </ul>
   </div>
@@ -83,12 +86,23 @@ header{
 }
 li{
   height: 100rpx;
-  padding: 10rpx 0 10rpx 100rpx;
+  padding: 10rpx 0 10rpx 60rpx;
   box-sizing: border-box;
   border-bottom: 1px solid #eee;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  image{
+    width: 44rpx;
+    height: 44rpx;
+  }
+  div{
+    flex: 1;
+    margin-left: 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
   p:nth-child(1){
     font-size: 34rpx;
   }

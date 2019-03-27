@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createLogger from 'vuex/dist/logger';
+// import createLogger from 'vuex/dist/logger';
 
 // 挂载modules
 import index from './modules/index'
@@ -26,5 +26,5 @@ export default new Vuex.Store({
       state.info = payload;
     }
   },
-  plugins: [createLogger()]
+  // plugins: [createLogger()]
 })

@@ -34,7 +34,7 @@
 
 
 <script>
-import {mapState, mapActions} from 'vuex';
+import {mapState, mapMutations, mapActions} from 'vuex';
 const moment = require('moment');
 
 const range = [
@@ -110,6 +110,9 @@ export default {
     ...mapActions({
       submitInterview: 'interview/submit'
     }),
+    ...mapMutations({
+      updateState: 'interview/updateState'
+    }),
     // 监听多列选择器每列变化
     columnChange(e){
       let {column, value} = e.target;
@@ -123,7 +126,10 @@ export default {
     },
     // 提交添加面试
     async submit(e){
-      console.log('e...', e);
+      // 判断是否在提交状态
+      if (this.submiting){
+        return false;
+      }
       // 判断公司名称是否为空
       if (!this.current.company){
         wx.showToast({
@@ -152,8 +158,10 @@ export default {
       this.current.start_time = moment(this.dateShow).unix()*1000;
       // 添加form_id
       this.current.form_id = e.target.formId;
+      this.submiting = true;
       let data = await this.submitInterview(this.current);
       console.log('data...', data);
+      this.submiting = false;
       // 处理添加结果
       if (data.code == 0){
         wx.showModal({
@@ -164,7 +172,13 @@ export default {
           confirmColor: '#197DBF', //确定按钮的文字颜色,
           success: res => {
             if (res.confirm) {
-             wx.navigateTo({ url: '/pages/index/main' });
+             this.updateState({
+                form_id: '',
+                company: '',
+                address: '',
+                phone: ''
+             })
+             wx.navigateTo({ url: '/pages/sign/list/main' });
             }
           }
         });

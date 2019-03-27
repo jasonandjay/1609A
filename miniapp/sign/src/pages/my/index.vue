@@ -20,7 +20,7 @@
         <image src="/static/images/arrow.svg"></image>
       </button>
     </ul>
-    <div class="phone" v-if="showPhoneDialog" @click="showPhoneDialog=false">
+    <div class="phone" v-if="showPhoneDialog" @click="hideMask" data-id=1>
       <p>为了更好的使用我们的服务，我们需要获取你的手机号码</p>
       <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">同意</button>
     </div>
@@ -29,7 +29,7 @@
 
 <script>
 import {getLocation, getAuth} from '@/utils/index.js'
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 
 export default {
   data () {
@@ -57,14 +57,34 @@ export default {
     ...mapActions({
       bindPhoneNumber: 'user/getPhoneNumber'
     }),
+    ...mapMutations({
+      updateState: 'updateState'
+    }),
     async getPhoneNumber(e){
       let data = await this.bindPhoneNumber({
         iv: e.target.iv,
         encryptedData: e.target.encryptedData
       })
+      this.showPhoneDialog = false;
+      if (data.data.phoneNumber){
+        wx.showToast({
+          title: '绑定手机号成功', //提示的内容,
+        });
+        // 更新全局state
+        this.updateState({...this.info, phone: data.data.phoneNumber});
+      }else{
+          wx.showToast({
+          title: '绑定手机号失败', //提示的内容,
+        });
+      }
     },
     goSignList(){
       wx.navigateTo({ url: '/pages/sign/list/main' });
+    },
+    hideMask(e){
+      if (e.target.dataset.id == 1){
+        this.showPhoneDialog = false;
+      }
     }
   },
 

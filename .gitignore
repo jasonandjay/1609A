@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+dist/
+server/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+up_wechat_app/
+up_wechat_app_B/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

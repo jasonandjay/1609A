@@ -6,7 +6,9 @@ const state = {
 
 const mutations = {
   updateState(state, payload){
-    state.current = {...state.current, ...payload};
+    for (let key in payload){
+      state[key] = payload[key]+''
+    }
   }
 }
 

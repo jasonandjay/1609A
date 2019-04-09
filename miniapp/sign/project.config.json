@@ -11,7 +11,7 @@
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
 	"appid": "wx3375420e2c184d34",
-	"projectname": "sign",
+	"projectname": "一面而就",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -64,7 +64,14 @@
 					"id": 4,
 					"name": "面试详情",
 					"pathName": "pages/sign/detail/main",
-					"query": "id=442&view=1",
+					"query": "id=636",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "打卡页面",
+					"pathName": "pages/sign/sign/main",
+					"query": "",
 					"scene": null
 				}
 			]

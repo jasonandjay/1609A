@@ -59,10 +59,11 @@ export default {
       wx.makePhoneCall({ phoneNumber: this.info.phone });
     },
     goSign(){
-      wx.showToast({
-        title: '功能正在紧急开发中', //提示的内容,
-        icon: 'none', //图标,
-      });
+      // wx.showToast({
+        // title: '功能正在紧急开发中', //提示的内容,
+        // icon: 'none', //图标,
+      // });
+      wx.navigateTo({ url: '/pages/sign/sign/main' });
     },
     giveup(){
       wx.showModal({

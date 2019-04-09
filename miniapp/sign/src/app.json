@@ -5,7 +5,8 @@
     "pages/sign/add/main",
     "pages/sign/search/main",
     "pages/sign/list/main",
-    "pages/sign/detail/main"
+    "pages/sign/detail/main",
+    "pages/sign/sign/main"
   ],
   "permission": {
     "scope.userLocation": {

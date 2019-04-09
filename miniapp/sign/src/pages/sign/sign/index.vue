@@ -18,7 +18,7 @@ import Map from '@/components/map.vue'
 export default {
   data () {
     return {
-      markers: []
+      // markers: []
       // markers: [{
       //   iconPath: '/static/images/job.png',
       //   id: 0,
@@ -37,14 +37,18 @@ export default {
       info: state=>state.sign.info
     }),
     markers(){
-      return [{
-        iconPath: '/static/images/job.png',
-        id: 0,
-        latitude: this.info.latitude,
-        longitude: this.info.longitude,
-        width: 50,
-        height: 50
-      }]
+      if (this.info && Object.keys(this.info)){
+        return [{
+          iconPath: '/static/images/job.png',
+          latitude: this.info.latitude,
+          longitude: this.info.longitude,
+          title: this.info.company,
+          width: 20,
+          height: 20
+        }]
+      }else{
+        return []
+      }
     }
   },
 

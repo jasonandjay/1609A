@@ -8,6 +8,8 @@
     scale="14"
     show-location
     show-compass
+    :circles="circle"
+    :include-points="points"
     :markers="markers"
     @markertap="markertap"
     @regionchange="regionChange"
@@ -26,6 +28,24 @@ export default {
         latitude: 40.03298,
         longitude: 116.29891
       },
+    }
+  },
+  computed: {
+    points(){
+      return [this.location, ...this.markers]
+    },
+    circle(){
+      if (!this.markers.length){
+        return []
+      }else{
+        return [{
+          ...this.markers[0],
+          color: '#197DBF',
+          fillColor: 'rgba(0,0,0, .3)',
+          radius: 500,
+          strokeWidth: 2
+        }]
+      }
     }
   },
   watch: {

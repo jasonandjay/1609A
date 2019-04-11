@@ -2,7 +2,7 @@ import {getSignList, getSignDetail, updateSignDetail} from '@/api/index';
 const moment = require('moment');
 
 const state = {
-  active: 0, //表示当前面试类型，0表示全部，1表示未开始，1表示已打卡，2表示已放弃
+  active: 1, //表示当前面试类型，0表示全部，1表示未开始，1表示已打卡，2表示已放弃
   list: [], //面试列表
   info: {}, //面试详情数据
   hasMore: true,  //是否有更多数据

@@ -6,7 +6,6 @@
     </div>
     <!-- 重新定位图标 -->
     <cover-view class="current">
-      <cover-image class="location" @tap="goCurrent" src="/static/images/location.png" />
       <button class="add" @tap="goAdd">添加面试</button>
       <button class="my" @tap="goMy">
         <cover-image src="/static/images/my.png"/>
@@ -47,10 +46,6 @@ export default {
     // 点击标注物
     marketTap(e){
 
-    },
-    // 重新定位
-    goCurrent(){
-      this.reLocation = !this.reLocation;
     },
     // 去我的页面
     goMy(){

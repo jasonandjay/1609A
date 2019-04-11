@@ -2,11 +2,11 @@
   <div class="wrap">
     <!-- 首页地图模块 -->
     <div class="map">
-      <Map :markers="markers"/>
+      <Map :markers="markers" :updateDistance="updateDistance"/>
     </div>
     <!-- 打卡按钮 -->
     <cover-view class="current">
-      <button class="add" @tap="goAdd">打卡</button>
+      <button class="add" @tap="goSign">打卡</button>
     </cover-view>
   </div>
 </template>
@@ -18,15 +18,7 @@ import Map from '@/components/map.vue'
 export default {
   data () {
     return {
-      // markers: []
-      // markers: [{
-      //   iconPath: '/static/images/job.png',
-      //   id: 0,
-      //   latitude: 40.03298,
-      //   longitude: 116.29891,
-      //   width: 50,
-      //   height: 50
-      // }]
+      distance: 0
     }
   },
   components: {
@@ -36,6 +28,9 @@ export default {
     ...mapState({
       info: state=>state.sign.info
     }),
+    distance(){
+      return getDistance(this.info.latitude, this.info.longitude, )
+    },
     markers(){
       if (this.info && Object.keys(this.info)){
         return [{
@@ -53,9 +48,44 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      updateDetail: 'sign/updateDetail'
+    }),
     // 点击标注物
     marketTap(e){
 
+    },
+    updateDistance(distance){
+      console.log('distance...', distance);
+      this.distance = distance;
+    },
+    async goSign(){
+      let distance = this.distance;
+      if (this.distance < 100){
+        let result = await this.updateDetail({
+          id: this.info.id,
+          params: {
+            status: 0,
+            sign_time: +new Date()
+          }
+        })
+        console.log('result...', result);
+        wx.showToast({
+          title: '打卡成功', //提示的内容,
+          icon: 'none' //图标,
+        });
+      }else{
+          if (this.distance > 1000){
+            distance = (this.distance/1000).toFixed(2)+'公里'
+          }else{
+            distance = this.distance+'米'
+          }
+          console.log('distance...', distance, this.distance);
+          wx.showToast({
+            title: `你距目的地还有${distance},暂时还不能打卡`, //提示的内容
+            icon: 'none'
+          });
+      }
     }
   },
 

@@ -123,7 +123,7 @@ ul{
 }
 li{
   width: 720rpx;
-  height: 88rpx;
+  min-height: 88rpx;
   margin-left: 30rpx;
   border-bottom: 1rpx solid #eee;
   display: flex;
@@ -139,11 +139,11 @@ li{
     // text-align: right;
     font-size: 30rpx;
     color: #333;
-    height: 88rpx;
-    line-height: 88rpx;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    // height: 88rpx;
+    // line-height: 88rpx;
+    // overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
     padding-right: 30rpx;
     box-sizing: border-box;
   }

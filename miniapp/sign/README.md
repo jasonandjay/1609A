@@ -48,12 +48,16 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     - [x] 面试详情
     - [x] 面试分享
     - [x] 面试推送
-    - [ ] 打卡功能
+    - [x] 打卡功能
     - [ ] 面试导航
 - [ ] 支付功能
 
 
 ## 更新日志
+### 1.1.0
+  - 时间：2019.04.11
+  - 增加面试打卡功能，100m以内
+
 ### 1.0.2
   - 时间：2019.03.27
   - 修复分页数据获取失败

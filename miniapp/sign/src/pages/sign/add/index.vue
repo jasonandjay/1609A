@@ -20,6 +20,13 @@
           @columnchange="columnChange"
         ><view class="date">{{dateShow}}</view>
         </picker>
+        <icon
+          @click="showTimeTip"
+          class="tip"
+          type="warn"
+          color="#197DBF"
+          size="24">
+        </icon>
       </li>
        <li>
         <lable for="">面试地址</lable>
@@ -100,7 +107,7 @@ export default {
     // 显示的日期
     dateShow(){
       return moment()
-      .add(this.info.date[0], 'd')
+      .add(moment().hour()==23?this.info.date[0]-1:this.info.date[0], 'd')
       .add(this.info.date[1]+1, 'h')
       .minute(this.info.date[2]*10)
       .format('YYYY-MM-DD HH:mm');
@@ -119,6 +126,12 @@ export default {
       let date = [...this.info.date];
       date[column] = value;
       this.info.date = date;
+    },
+    showTimeTip(){
+      wx.showToast({
+        title: '在面试前一个小时我们会通知你哦', //提示的内容,
+        icon: 'none', //图标,
+      });
     },
     // 去选择地址
     goSearch(){
@@ -165,7 +178,7 @@ export default {
       // 处理添加结果
       if (data.code == 0){
         wx.showModal({
-          title: '系统提示', //提示的标题,
+          title: '温馨提示', //提示的标题,
           content: data.msg, //提示的内容,
           showCancel: false,
           confirmText: '确定', //确定按钮的文字，默认为取消，最多 4 个字符,
@@ -239,6 +252,9 @@ li{
 }
 li:last-child{
   border: none;
+}
+.tip{
+  margin-right: 30rpx;
 }
 textarea{
   font-size: 30rpx;

@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <header>
-      <span @click="tabChange(index)" v-for="(item, index) in types" :key="index" :class="active===index?'active':''">{{item}}</span>
+      <span @click="tabChange(index)" v-for="(item, index) in types" :key="index" :class="(active+3)%4===index?'active':''">{{item}}</span>
     </header>
     <signList :list="list"></signList>
-    <p class="more" v-if="list.length">{{hasMore?'上拉加载更多': '我是有底线的'}}</p>
+    <p class="more" v-if="list.length && list.length>=10">{{hasMore?'上拉加载更多': '我是有底线的'}}</p>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ import {mapState, mapMutations, mapActions} from 'vuex'
 export default {
   data(){
     return {
-      types: ['全部','未开始','已打卡','已放弃']
+      types: ['未开始','已打卡','已放弃','全部']
     }
   },
   computed: {
@@ -34,7 +34,7 @@ export default {
       getList: 'sign/getList'
     }),
     tabChange(index){
-      this.updateState({active: index, page: 1});
+      this.updateState({active: (index+1)%4, page: 1});
       this.getList();
     }
   },

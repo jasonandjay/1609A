@@ -42,6 +42,7 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 - [x] 定位功能
 - [x] 我的功能
     - [x] 绑定手机号
+    - [x] 指纹识别
 - [x] 面试功能
     - [x] 添加面试
     - [x] 面试列表
@@ -49,11 +50,18 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
     - [x] 面试分享
     - [x] 面试推送
     - [x] 打卡功能
-    - [ ] 面试导航
+    - [x] 面试导航
 - [ ] 支付功能
+- [ ] 数据聚合功能
 
 
 ## 更新日志
+### 1.2.0
+  - 时间：2019。10.25
+  - 增加导航功能
+  - 增加指纹识别
+  - 美化若干bug
+
 ### 1.1.0
   - 时间：2019.04.11
   - 增加面试打卡功能，100m以内

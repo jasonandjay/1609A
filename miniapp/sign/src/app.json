@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/main",
     "pages/my/main",
+    "pages/finger/main",
     "pages/sign/add/main",
     "pages/sign/search/main",
     "pages/sign/list/main",
@@ -18,5 +19,11 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "一面而就",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "plugins": {
+		"routePlan": {
+			"version": "1.0.1",
+			"provider": "wx50b5593e81dd937a"
+		}
+	}
 }

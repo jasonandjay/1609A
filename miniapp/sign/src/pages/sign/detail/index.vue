@@ -1,17 +1,17 @@
 <template>
   <div class="wrap">
     <ul>
-      <li>
+      <li @click="navigate" >
         <label for="">面试地址：</label>
-        <span>{{info.address && info.address.address}}</span>
+        <span class="active">{{info.address && info.address.address}}</span>
       </li>
       <li>
         <label for="">面试时间：</label>
         <span>{{info.start_time}}</span>
       </li>
-      <li>
+      <li @click="makePhone">
         <label for="">联系方式：</label>
-        <span @click="makePhone">{{info.phone}}</span>
+        <span class="active">{{info.phone}}</span>
       </li>
       <li>
         <label for="">是否提醒：</label>
@@ -64,6 +64,19 @@ export default {
         // icon: 'none', //图标,
       // });
       wx.navigateTo({ url: '/pages/sign/sign/main' });
+    },
+    navigate(){
+      let plugin = requirePlugin('routePlan');
+      let key = 'ZVUBZ-J46CU-7IPVI-2N6M4-2EIRV-V7FCM';  //使用在腾讯位置服务申请的key
+      let referer = '一面而就';   //调用插件的app的名称
+      let endPoint = JSON.stringify({  //终点
+          'name': this.info.company,
+          'latitude': this.info.latitude,
+          'longitude': this.info.longitude
+      });
+      wx.navigateTo({
+          url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
+      });
     },
     giveup(){
       wx.showModal({
@@ -147,6 +160,9 @@ li{
     padding-right: 30rpx;
     box-sizing: border-box;
   }
+  span.active{
+    color: #07c160
+  }
 }
 li:last-child{
   border-bottom: none;
@@ -158,6 +174,8 @@ li:last-child{
     flex: 1;
     color: #fff;
     margin: 15rpx;
+    border-radius: 10rpx;
+    line-height: 2.2;
   }
   button:first-child{
     background: #197DBF;

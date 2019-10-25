@@ -24,29 +24,25 @@ export default {
     return {
       // 用户当前位置
       reLocation: false,
-      markers: []
-      // markers: [{
-      //   iconPath: '/static/images/job.png',
-      //   id: 0,
-      //   latitude: 40.03298,
-      //   longitude: 116.29891,
-      //   width: 50,
-      //   height: 50
-      // }]
     }
   },
   components: {
     Map
   },
-  computed: {
-
+  created() {
+    // 判断是否需要指纹识别
+    let fingerInfo = wx.getStorageSync("finger");
+    if (
+      !fingerInfo ||
+      !fingerInfo.finger ||
+      +new Date() - fingerInfo.timestamp > 24 * 60 * 60 * 1000
+    ) {
+      console.log(123)
+      wx.navigateTo({ url: "/pages/finger/main" });
+      return;
+    }
   },
-
   methods: {
-    // 点击标注物
-    marketTap(e){
-
-    },
     // 去我的页面
     goMy(){
       wx.navigateTo({ url: '/pages/my/main' });

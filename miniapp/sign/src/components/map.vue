@@ -8,6 +8,7 @@
       subkey="X7RBZ-MMOKR-UQEWJ-WSCXC-IVXVK-IFFLL"
       show-location
       show-compass
+      scale=10
       :circles="circle"
       :include-points="points"
       :markers="markers"
@@ -46,6 +47,7 @@ export default {
       if (!this.markers.length){
         return []
       }else{
+        // console.log('distance...', this.distance, this.distance>100);
         return [{
           ...this.markers[0],
           color:  this.distance>100?'#C9394A': '#197DBF',
@@ -84,7 +86,7 @@ export default {
       default: ()=>{}
     }
   },
-  mounted() {
+  onShow() {
     this.goCurrent();
   },
   methods: {
@@ -93,10 +95,11 @@ export default {
         let location = await getLocation();
         this.location = location;
 
-        console.log('scope.userLocation...', this.location, this.markers[0]);
+        // console.log('scope.userLocation...', this.location, this.markers[0]);
         // 重新计算距离
         if (this.updateDistance){
-          this.distance = getDistance(this.location.latitude, this.location.longitude, this.markers[0].latitude, this.markers[0].longitude)
+          let distance = getDistance(this.location.latitude, this.location.longitude, this.markers[0].latitude, this.markers[0].longitude)
+          this.distance = distance.toFixed(2);
           this.updateDistance(this.distance)
         }
       })

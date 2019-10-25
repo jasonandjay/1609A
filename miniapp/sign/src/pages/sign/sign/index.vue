@@ -38,8 +38,8 @@ export default {
           latitude: this.info.latitude,
           longitude: this.info.longitude,
           title: this.info.company,
-          width: 20,
-          height: 20
+          width: 32,
+          height: 32
         }]
       }else{
         return []
@@ -78,7 +78,7 @@ export default {
           if (this.distance > 1000){
             distance = (this.distance/1000).toFixed(2)+'公里'
           }else{
-            distance = this.distance+'米'
+            distance = this.distance.toFixed(2)+'米'
           }
           console.log('distance...', distance, this.distance);
           wx.showToast({
@@ -91,7 +91,7 @@ export default {
 
   async onShow(){
     // 修改标题
-    wx.setNavigationBarTitle({ title: '打卡: '+this.info.company });
+    wx.setNavigationBarTitle({ title: '打卡 - '+this.info.company });
   },
 }
 </script>

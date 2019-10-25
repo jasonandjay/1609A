@@ -1,5 +1,5 @@
 {
-	"description": "项目配置文件。",
+	"description": "项目配置文件",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
@@ -11,7 +11,9 @@
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
 	"appid": "wx3375420e2c184d34",
-	"projectname": "一面而就",
+	"projectname": "%E4%B8%80%E9%9D%A2%E8%80%8C%E5%B0%B1",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -27,6 +29,10 @@
 		},
 		"game": {
 			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -72,6 +78,12 @@
 					"name": "打卡页面",
 					"pathName": "pages/sign/sign/main",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "指纹",
+					"pathName": "pages/finger/main",
 					"scene": null
 				}
 			]

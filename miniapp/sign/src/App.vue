@@ -9,17 +9,17 @@ export default {
     getAuth('scope.userLocation', async ()=>{
       let location = await getLocation();
       wx.setStorageSync('location', location)
-      console.log('location...', location);
+      // console.log('location...', location);
     })
-    let openid = wx.getStorageSync('openid');
+    // let openid = wx.getStorageSync('openid');
     // if (!openid){
       // 调用登陆获取code
       wx.login({
         success: async res=>{
-          console.log('res...', res);
+          // console.log('res...', res);
           let data = await login(res.code);
           this.updateState(data.data);
-          wx.setStorageSync('openid', data.data.openid);
+          // wx.setStorageSync('openid', data.data.openid);
         }
       })
     // }
